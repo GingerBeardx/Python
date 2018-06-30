@@ -26,18 +26,15 @@ def tester(case):
     elif isinstance(case, basestring) == True:
         # if string - determine if string is short or long
         if len(case) >= 50:
-            print "Long sentence"
+            print "Long sentence."
         else:
-            print "Short sentence"
+            print "Short sentence."
     elif isinstance(case, list) == True:
         # if list - determine if the list is big or short
         if len(case) >= 10:
             print "Big list!"
         else:
             print "Short list."
-    """ print isinstance(sI, list)
-    
-    print isinstance(sI, basestring) """
 
 
 tester(eS)
