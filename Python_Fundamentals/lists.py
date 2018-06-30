@@ -28,3 +28,9 @@ print x[2:4]
 my_list = [1, 'Zen', 'hi']
 print len(my_list)
 # output 3
+
+""" 
+list.extend(list2) adds all values from a second sequence to the end of the original sequence.
+list.pop(index) remove a value at given position. if no parameter is passed, defaults to final value in the list.
+list.index(value) returns the index position in a list for the given parameter.
+"""
