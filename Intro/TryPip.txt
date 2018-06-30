@@ -1,0 +1,23 @@
+pip isntall Django==1.11.9
+  Looks to have installed Django version 1.11.9
+
+pip list
+  Displays a list of installed packages on my PC
+
+pip install Django==1.11.9
+  Running this the second time showed that the package is already installed on my PC and where it is located.
+
+pip freeze
+  This list is missing the version of pip and setuptools. And from a quick google search, freeze lists the requirements for each installed package.
+
+pip freeze > requirements.txt
+  When opening this file, it has the contents of the results from running the freeze command.
+
+pip uninstall Django
+  This command unisntalls django, you could use this to uninstall other packages as well.
+
+pip show Django
+  This command would normally show info for installed packages; however, since I uninstalled the package, there is nothing to display.
+
+pip search Flask
+  This command shows a list of packages that relate to Flask.
