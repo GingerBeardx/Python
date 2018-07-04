@@ -1,0 +1,7 @@
+1) Navigate to the directory where you want the environment
+2) Create the environment using `python -m virtualenv ENV_NAME`
+3) Activate the environment using `source ENV_NAME/Scripts/activate`
+    a) Remember to use pip list to see what packages are installed
+    b) You can also create a text file of the installed packages using `pip freeze > requirements.txt`
+4) Deactivate the environemnt using `Deactivate`
+5) If you wish to remove an environemnt, navigate to the parent directory for the environemnt and type `rm -r venv/`
