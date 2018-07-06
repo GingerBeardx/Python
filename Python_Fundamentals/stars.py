@@ -2,7 +2,7 @@ def stars(arr):
     for each in arr:
         string = ""
         count = 0
-        if isinstance(each, basestring) == True:
+        if isinstance(each, basestring):
             while count < len(each):
                 string += each[0].lower()
                 count += 1
