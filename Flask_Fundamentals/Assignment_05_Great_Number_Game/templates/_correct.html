@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+
+{% block info %}
+    <div class="text-center p-5" style="background-color: greenyellow;"}>
+        <h1>Correct!</h1>
+        <form action="/reset" method="POST">
+            <button type="submit" class="btn btn-success mt-3">Play Again?</button>
+        </form>
+    </div>
+{% endblock info %}
