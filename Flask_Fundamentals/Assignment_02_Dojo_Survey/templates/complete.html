@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dojo Survey</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ 'static/style.css' }}">
+    </head>
+<body>
+    <div class="container mt-5 pb-3">
+        <h2 class="pt-3">Thank you, you submitted the following:</h2>
+        <div class="row">
+            <p class="col-sm-6 pt-0 pb-0">Name:</p>
+            <p class="col-sm-6 pt-0 pb-0">{{ form_data['your_name'] }}</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-6">Dojo Location:</p>
+            <p class="col-sm-6">{{ form_data['location'] }}</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-6">Favorite Language:</p>
+            <p class="col-sm-6">{{ form_data['language'] }}</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-6">Your Comment:</p>
+            <p class="col-sm-6">{{ form_data['comment'] }}</p>
+        </div>
+        <div class="d-flex justify-content-end mb-3 col-sm-12">
+            <a href="/" class="btn btn-primary btn-lg">Go Back</a>
+        </div>
+    </div> <!-- End of container -->
+</body>
+</html>
