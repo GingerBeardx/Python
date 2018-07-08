@@ -89,11 +89,13 @@
             <form class="activity">
                 <div class="form-group col-sm-12">
                     <label for="Activity">Activities:</label><br>
-                    <p>{{ session.strings }}</p>
-                    
-                    <!-- {% for string in session.strings %}
-                    <p>{{ string }}</p>
-                    {% endfor %} -->
+                    <!-- <p>{{ session.strings }}</p> -->
+                    <div class="activities">
+                        <!-- <p>{{ session.strings }}</p> -->
+                        {% for string in session.strings %}
+                            <p>{{ string }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </form>
         </div>

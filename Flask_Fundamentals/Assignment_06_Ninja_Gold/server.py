@@ -3,7 +3,7 @@ import random
 app = Flask(__name__)
 app.key = random.randrange(0,15678895)
 app.secret_key = str(app.key)
-
+app.count = 0
 
 
 def update_total_gold(add_gold):
@@ -11,17 +11,17 @@ def update_total_gold(add_gold):
         session['total_gold'] += add_gold
     except KeyError:
         session['total_gold'] = 0
-        session['total_gold'] += add_gold
 
 def update_strings(location, add_gold):
     try:
         string = "earned {} gold from {}".format(add_gold, location)
-        session['strings'] += string + " "
+        session['strings'][app.count] = string
         print session['strings']
     except KeyError:
-        session ['strings'] = ''
-        string = "earned {} gold from {}".format(add_gold, location)
-        session['strings'] += string + " "
+        session['strings'] ={}
+        session['strings'][app.count] = "init"
+        app.count += 1
+        
 
 def gold_update(location):
     if location == 'farm':
@@ -37,17 +37,22 @@ def gold_update(location):
 
 @app.route('/')
 def index():
+    update_total_gold(0)
+    update_strings('farm', 0)
+    print session['strings']
     return render_template('index.html')
 
 @app.route('/process_money', methods=['POST'])
 def proc_money():
     gold_update(request.form['building'])
+    app.count += 1
     return redirect('/')
 
 @app.route('/reset', methods=['POST'])
 def reset_gold():
     session['total_gold'] = 0
-    session['strings'] = ''
+    session['strings'] = {}
+    app.count = 0
     return redirect('/')
 
 app.run(debug=True)
