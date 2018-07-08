@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, request
-import random
+import random, datetime
 app = Flask(__name__)
 app.key = random.randrange(0,15678895)
 app.secret_key = str(app.key)
@@ -11,10 +11,14 @@ def init_vals():
         print session['strings']
     except KeyError:
         session['total_gold'] = 0
-        session['strings'] ={}    
+        session['strings'] = {}
 
 def update_strings(location, add_gold):
-    string = "earned {} gold from {}".format(add_gold, location)
+    if add_gold > 0:
+        netted = "Earned"
+    else:
+        netted = "Entered a casino and lost"
+    string = "{} {} gold from the {}! ({})".format(netted, abs(add_gold), location, datetime.datetime.now())
     session['strings'][app.count] = string
     app.count += 1
         

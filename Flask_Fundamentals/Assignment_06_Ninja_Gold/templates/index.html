@@ -89,11 +89,9 @@
             <form class="activity">
                 <div class="form-group col-sm-12">
                     <label for="Activity">Activities:</label><br>
-                    <!-- <p>{{ session.strings }}</p> -->
                     <div class="activities form-control ">
                         {% for key, value in acts.iteritems() %}
-                            <p class="mb-0 mt-0 pb-0 pt-0">{{ value }}</p>
-                            
+                            <p class="mb-0 mt-0 pb-0 pt-0">{{ value }}</p> 
                         {% endfor %}
                     </div>
                 </div>
