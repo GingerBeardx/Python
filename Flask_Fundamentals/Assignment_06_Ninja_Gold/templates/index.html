@@ -85,13 +85,17 @@
                 </div>
             </div>
         </div> <!-- End of card deck -->
-        <!-- <div class="row">
+        <div class="row">
             <form class="activity">
                 <div class="form-group col-sm-12">
                     <label for="Activity">Activities:</label><br>
-                    <textarea class="form-control rounded-3" name="activity" id="activity" cols="170" rows="15" placeholder="Click an activity to start earning gold..." readonly></textarea>
+                    <p>{{ session.strings }}</p>
+                    
+                    <!-- {% for string in session.strings %}
+                    <p>{{ string }}</p>
+                    {% endfor %} -->
                 </div>
-            </form> -->
+            </form>
         </div>
         
     </div> <!-- End of container -->
