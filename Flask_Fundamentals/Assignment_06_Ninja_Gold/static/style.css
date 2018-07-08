@@ -1,0 +1,6 @@
+container {
+    box-shadow: 2px 0px 15px black;
+}
+.activity textarea {
+    width: 98%;
+}
