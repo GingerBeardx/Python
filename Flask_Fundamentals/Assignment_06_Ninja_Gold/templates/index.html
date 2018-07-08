@@ -12,11 +12,14 @@
 </head>
 <body>
     <div class="container mt-3">
-        <form>
+        <form action="/reset" method="POST">
             <div class="form-row mb-3">
                 <label for="total-gold" class="col-sm-2 col-form-label">Your Gold:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="total-gold" value="$ 500"readonly>
+                <div class="col-sm-7">
+                    <p class="form-control">$ {{ session.total_gold }}</p>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <input type="submit" class="btn btn-warning" value="Reset"/>
                 </div>
             </div>
         </form>
@@ -27,9 +30,9 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">(earns 10-20 gold)</h5>
-                    <form action="/process_money" method="post">
+                    <form action="/process_money" method="POST">
                         <input type="hidden" name="building" value="farm" />
-                        <input type="submit" class="btn btn-success"value="Find Gold!"/>
+                        <input type="submit" class="btn btn-success" value="Find Gold!"/>
                     </form>    
                 </div>
                 <div class="card-footer">
@@ -42,9 +45,9 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">(earns 5-10 gold)</h5>
-                    <form action="/process_money" method="post">
+                    <form action="/process_money" method="POST">
                         <input type="hidden" name="building" value="cave" />
-                        <input type="submit" class="btn btn-success"value="Find Gold!"/>
+                        <input type="submit" class="btn btn-success" value="Find Gold!"/>
                     </form>   
                 </div>
                 <div class="card-footer">
@@ -57,9 +60,9 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">(earns 2-5 gold)</h5>
-                    <form action="/process_money" method="post">
+                    <form action="/process_money" method="POST">
                         <input type="hidden" name="building" value="house" />
-                        <input type="submit" class="btn btn-success"value="Find Gold!"/>
+                        <input type="submit" class="btn btn-success" value="Find Gold!"/>
                     </form>   
                 </div>
                 <div class="card-footer">
@@ -72,7 +75,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">(earns/takes 0-50 gold)</h5>
-                    <form action="/process_money" method="post">
+                    <form action="/process_money" method="POST">
                         <input type="hidden" name="building" value="casino" />
                         <input type="submit" class="btn btn-success"value="Find Gold!"/>
                     </form>   
@@ -82,15 +85,16 @@
                 </div>
             </div>
         </div> <!-- End of card deck -->
-        <div class="row">
+        <!-- <div class="row">
             <form class="activity">
                 <div class="form-group col-sm-12">
                     <label for="Activity">Activities:</label><br>
-                    <textarea class="form-control rounded-3" name="activity" id="activity" cols="170" rows="10" placeholder="Click an activity to start earning gold..." readonly></textarea>
+                    <textarea class="form-control rounded-3" name="activity" id="activity" cols="170" rows="15" placeholder="Click an activity to start earning gold..." readonly></textarea>
                 </div>
-            </form>
+            </form> -->
         </div>
         
     </div> <!-- End of container -->
+
 </body>
 </html>
