@@ -5,22 +5,18 @@ app.key = random.randrange(0,15678895)
 app.secret_key = str(app.key)
 app.count = 0
 
-
-def update_total_gold(add_gold):
+def init_vals():
     try:
-        session['total_gold'] += add_gold
-    except KeyError:
-        session['total_gold'] = 0
-
-def update_strings(location, add_gold):
-    try:
-        string = "earned {} gold from {}".format(add_gold, location)
-        session['strings'][app.count] = string
+        print session['total_gold']
         print session['strings']
     except KeyError:
-        session['strings'] ={}
-        session['strings'][app.count] = "init"
-        app.count += 1
+        session['total_gold'] = 0
+        session['strings'] ={}    
+
+def update_strings(location, add_gold):
+    string = "earned {} gold from {}".format(add_gold, location)
+    session['strings'][app.count] = string
+    app.count += 1
         
 
 def gold_update(location):
@@ -33,14 +29,12 @@ def gold_update(location):
     elif location == 'casino':
         add_gold = random.randrange(-50, 51)
     update_strings(location, add_gold)
-    update_total_gold(add_gold)
+    session['total_gold'] += add_gold
 
 @app.route('/')
 def index():
-    update_total_gold(0)
-    update_strings('farm', 0)
-    print session['strings']
-    return render_template('index.html')
+    init_vals()
+    return render_template('index.html', acts=session['strings'])
 
 @app.route('/process_money', methods=['POST'])
 def proc_money():

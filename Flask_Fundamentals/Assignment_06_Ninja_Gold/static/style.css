@@ -1,6 +1,8 @@
 container {
     box-shadow: 2px 0px 15px black;
 }
-.activity textarea {
-    width: 98%;
+.activities {
+    height: 300px;
+    width: 1024px;
+    overflow: scroll;
 }
