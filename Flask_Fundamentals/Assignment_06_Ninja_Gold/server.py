@@ -7,19 +7,22 @@ app.count = 0
 
 def init_vals():
     try:
-        print session['total_gold']
-        print session['strings']
+        session['total_gold']
+        session['activities']
     except KeyError:
         session['total_gold'] = 0
-        session['strings'] = {}
+        session['activities'] = []
 
 def update_strings(location, add_gold):
-    if add_gold > 0:
+    if add_gold >= 0:
         netted = "Earned"
+        effect = "green"
     else:
-        netted = "Entered a casino and lost"
-    string = "{} {} gold from the {}! ({})".format(netted, abs(add_gold), location, datetime.datetime.now())
-    session['strings'][app.count] = string
+        netted = "Ouch! Played the odds and lost"
+        effect = "red"
+    time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+    string = "{} {} gold from the {}! ({})".format(netted, abs(add_gold), location, time)
+    session['activities'].append([effect, string])
     app.count += 1
         
 
@@ -38,7 +41,7 @@ def gold_update(location):
 @app.route('/')
 def index():
     init_vals()
-    return render_template('index.html', acts=session['strings'])
+    return render_template('index.html', acts=session['activities'])
 
 @app.route('/process_money', methods=['POST'])
 def proc_money():
@@ -49,7 +52,7 @@ def proc_money():
 @app.route('/reset', methods=['POST'])
 def reset_gold():
     session['total_gold'] = 0
-    session['strings'] = {}
+    session['activities'] = []
     app.count = 0
     return redirect('/')
 
