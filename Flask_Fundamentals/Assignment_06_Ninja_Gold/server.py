@@ -20,7 +20,7 @@ def update_strings(location, add_gold):
     else:
         netted = "Ouch! Played the odds and lost"
         effect = "red"
-    time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+    time = datetime.datetime.now().strftime("%Y-%m-%d[-]%H:%M:%S")
     string = "{} {} gold from the {}! ({})".format(netted, abs(add_gold), location, time)
     session['activities'].append([effect, string])
     app.count += 1
