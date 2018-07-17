@@ -1,0 +1,8 @@
+SQL SETUP 
+
+SELECT * FROM users
+
+SELECT clients.first_name AS client_first, clients.last_name, sites.domain_name, leads.first_name AS leads_first
+FROM clients
+JOIN sites ON clients.id = sites.clients_id
+JOIN leads ON sites.id = leads.sites_id
