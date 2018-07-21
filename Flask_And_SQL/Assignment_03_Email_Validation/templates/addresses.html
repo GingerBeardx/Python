@@ -26,17 +26,27 @@
                     <tr>
                         <th scope="col">Address</th>
                         <th scope="col">Date Entered</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for email in email_data %}
                         <tr>
                             <td>{{ email['email'] }}</td>
-                            <td>{{ email['created_at'] }}</td>
+                            <td>{{ email['time'] }}</td>
+                            <td>
+                                <form action="/delete/{{ email['id'] }}" method="POST">
+                                    <input type="hidden" name="email" value="{{ email['email'] }}" readonly/>
+                                    <input class='btn btn-sm btn-danger' type="submit" name="delete" value="Delete">
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <form action="/" method="GET">
+                <input type="submit" class="btn btn-sm btn-primary" value="Add Another Address">
+            </form>
         </div>
     </div>
 </body>

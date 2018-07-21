@@ -47,8 +47,18 @@ def address():
 
 @app.route('/success')
 def addresses():
-    query = 'SELECT email, created_at FROM emails'
+    query = "SELECT id, email, DATE_FORMAT(created_at, '%m/%d/%Y %l:%m %p') AS time FROM emails"
     users = mysql.query_db(query)
     return render_template('addresses.html', email_data=users)
+
+@app.route('/delete/<email_id>', methods=['POST'])
+def delete(email_id):
+    email = request.form['email']
+    flash('The email address, {}, has been deleted.'.format(email), 'danger')
+
+    query = "DELETE FROM emails WHERE id = :id"
+    data = {'id': email_id}
+    mysql.query_db(query, data)
+    return redirect('/success')
 
 app.run(debug=True)
