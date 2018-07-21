@@ -1,0 +1,4 @@
+(1045, "Access denied for user 'root'@'localhost' (using password: YES)") - Use the correct user name and password
+(2003, "Can't connect to MySQL server on '127.0.0.1' (10061)") - Make sure you're using the correct port - 3305 in my case
+(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM friends WHERE id = '2'' at line 1") - Clean up SQL syntax
+
