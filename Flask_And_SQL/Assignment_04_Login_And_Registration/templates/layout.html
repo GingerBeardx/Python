@@ -11,8 +11,10 @@
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Register and Login</a>        
         <div class="navbar">
-            <a class="btn btn-primary btn-small mr-1 ml-2" href="/login">Login <span class="sr-only">(current)</span></a>
-            <a class="btn btn-primary btn-small mr-1 ml-2 {{ session['show_button'] }}" href="/register">Register</a>
+            <span class="navbar-text {{ session['show_logout'] }}">{{ session['user_name'] }}</span>
+            <a class="btn btn-info btn-small mr-1 ml-2 {{ session['show_logout'] }}" href="/logout">Logout <span class="sr-only">(current)</span></a>
+            <a class="btn btn-primary btn-small mr-1 ml-2 {{ session['show_login'] }}" href="/login">Login <span class="sr-only">(current)</span></a>
+            <a class="btn btn-primary btn-small mr-1 ml-2 {{ session['show_register'] }}" href="/register">Register</a>
         </div>
     </nav>
     <div class="container mt-3">
