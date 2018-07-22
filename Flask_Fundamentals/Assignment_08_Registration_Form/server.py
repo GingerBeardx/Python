@@ -20,6 +20,7 @@ def register():
 
     if len(request.form['email']) < 1:
         flash('Please enter your email address', 'danger')
+        errors = True
     
     # validate e-mail
     is_valid = validate_email(request.form['email'])
