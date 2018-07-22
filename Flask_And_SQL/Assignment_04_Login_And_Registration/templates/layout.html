@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Assignment 04</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Register and Login</a>        
+        <div class="navbar">
+            <a class="btn btn-primary btn-small mr-1 ml-2" href="/login">Login <span class="sr-only">(current)</span></a>
+            <a class="btn btn-primary btn-small mr-1 ml-2 {{ session['show_button'] }}" href="/register">Register</a>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
