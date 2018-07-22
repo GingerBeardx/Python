@@ -4,7 +4,7 @@ from validate import validate_registration
 
 app = Flask(__name__)
 app.secret_key = "AMessageFromTheKing"
-mysql = MySQLConnector(app, 'email')
+mysql = MySQLConnector(app, 'login')
 
 @app.route('/')
 def index():
@@ -12,6 +12,8 @@ def index():
         session['show_button'] = []
     if not 'user_name' in session:
         session['user_name'] = []
+    print "*" * 80
+    print session
     session['show_button'] = 'inline-block'
     return render_template('index.html')
 
@@ -24,13 +26,28 @@ def register():
 def registration():
     if validate_registration(request.form) == True:
         return redirect('/register')
-    flash('Congratulations! User {} has been successfully registered'.format(request.form['first_name']), 'success')
-    session['user_name'] = request.form['first_name']
+    #Update database
+    query = "INSERT INTO users (email, password, first_name, last_name, created_at, updated_at) VALUES (:email, :password, :first_name, :last_name, NOW(), NOW());"
+    data = {
+        'email': request.form['email'],
+        'password': request.form['password'],
+        'first_name': request.form['first_name'],
+        'last_name': request.form['last_name'],
+    }
+    mysql.query_db(query, data)
+    flash('Congratulations! User {} {} has been successfully registered'.format(request.form['first_name'], request.form['last_name']), 'success')
+    session['user_name'] = '{} {}'.format(request.form['first_name'], request.form['last_name'])
     return redirect('/loggedin')
 
 @app.route('/loggedin')
 def loggedin():
     flash('User: {} has been successfully logged in!'.format(session['user_name']), 'success')
-    return render_template('dash.html')
+    query = "SELECT email, password, first_name, last_name, DATE_FORMAT(created_at, '%m/%d/%Y %l:%i %p') AS time FROM users"
+    users = mysql.query_db(query)
+    return render_template('dash.html', all_users=users)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 app.run(debug=True)
