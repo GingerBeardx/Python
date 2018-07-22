@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
-
+<!-- Page displayed upon successful login -->
 {% block content %}
     <div>
+    <!-- Show any flash messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -14,6 +15,7 @@
     </div>
     <h3>Welcome, {{ session['user_name'] }}! </h3>
     <h4>Here are the other registered users:</h4>
+    <!-- Shows a table of registered users -->
     <table class="table">
         <thead>
             <tr>
@@ -22,10 +24,10 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Created</th>
-                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Loops through users in the database to display each of them -->
             {% for user in all_users %}
                 <tr>
                     <td>{{ user['email'] }}</td>
@@ -33,12 +35,6 @@
                     <td>{{ user['first_name'] }}</td>
                     <td>{{ user['last_name'] }}</td>
                     <td>{{ user['time'] }}</td>
-                    <td>
-                        <form action="/delete/{{ user['id'] }}" method="POST">
-                            <input type="hidden" name="email" value="{{ user['email'] }}" readonly/>
-                            <input class='btn btn-sm btn-danger' type="submit" name="delete" value="Delete">
-                        </form>
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>

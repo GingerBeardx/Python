@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
-
+<!-- Login Page -->
 {% block content %}
     <h3>Please login:</h3>
+    <!-- Display Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -11,6 +12,7 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
+    <!-- Display login form -->
     <div>
         <form action="/logcheck" method="POST">
             <div class="form-row">

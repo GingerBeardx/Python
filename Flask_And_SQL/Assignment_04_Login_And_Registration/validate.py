@@ -41,8 +41,7 @@ def validate_login(form):
     # validate e-mail
     if len(form['email']) < 1:
         flash('Please enter your email address', 'danger')
-        errors = True
-    
+        errors = True    
     is_valid = validate_email(form['email'])
     if is_valid == False:
         flash('Please enter a valid email address', 'danger')

@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
-
+<!-- Registration page -->
 {% block content %}
     <h3>Getting closer and closer to a full app! Can you taste it?</h3>
     <p>Please fill out the form below to register:</p>
+    <!-- Display flash messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -12,6 +13,7 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
+    <!-- Registration form -->
     <form action="/registration" method="POST">
         <div class="form-row">
             <div class="form-group col-md-6">
