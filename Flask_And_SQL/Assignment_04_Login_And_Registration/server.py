@@ -37,11 +37,11 @@ def registration():
     mysql.query_db(query, data)
     flash('Congratulations! User {} {} has been successfully registered'.format(request.form['first_name'], request.form['last_name']), 'success')
     session['user_name'] = '{} {}'.format(request.form['first_name'], request.form['last_name'])
+    flash('User: {} has been successfully logged in!'.format(session['user_name']), 'success')
     return redirect('/loggedin')
 
 @app.route('/loggedin')
 def loggedin():
-    flash('User: {} has been successfully logged in!'.format(session['user_name']), 'success')
     query = "SELECT email, password, first_name, last_name, DATE_FORMAT(created_at, '%m/%d/%Y %l:%i %p') AS time FROM users"
     users = mysql.query_db(query)
     return render_template('dash.html', all_users=users)
@@ -49,5 +49,25 @@ def loggedin():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/logcheck', methods=['POST'])
+def logcheck():
+    query = "SELECT email, password, first_name, last_name FROM users WHERE email = :email"
+    data = {
+        'email': request.form['email']
+    }
+    user = mysql.query_db(query, data)
+    print user
+    if user == []:
+        flash('User does not exist. Please confirm info or register.', 'danger')
+        return redirect('/login')
+    print request.form['password']
+    for info in user:
+        if info['password'] != request.form['password']:
+            flash('Password for user is incorrect.', 'danger')
+            return redirect('/login')
+        session['user_name'] = '{} {}'.format(info['first_name'], info['last_name'])
+    flash('User: {} has been successfully logged in!'.format(session['user_name']), 'success')
+    return redirect('/loggedin')
 
 app.run(debug=True)

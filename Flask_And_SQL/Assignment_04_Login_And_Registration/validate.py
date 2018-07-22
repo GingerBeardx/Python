@@ -36,3 +36,20 @@ def validate_registration(form):
     
     return errors
 
+def validate_login(form):
+    errors = False
+    # validate e-mail
+    if len(form['email']) < 1:
+        flash('Please enter your email address', 'danger')
+        errors = True
+    
+    is_valid = validate_email(form['email'])
+    if is_valid == False:
+        flash('Please enter a valid email address', 'danger')
+        errors = True
+    # password checks
+    password = form['password']
+    if len(password) < 8:
+        flash('Password should be at least 8 digits long', 'danger')
+        errors = True
+    return errors
