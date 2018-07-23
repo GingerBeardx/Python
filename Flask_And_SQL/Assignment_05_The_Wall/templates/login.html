@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+<!-- Login Page -->
+{% block content %}
+    <h3>Please login:</h3>
+    <!-- Display Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <!-- Display login form -->
+    <div>
+        <form action="/logcheck" method="POST">
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" class="form-control" placeholder="johnny@appleseed.com">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
+        </form>    
+    </div>
+{% endblock %}
