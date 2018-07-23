@@ -1,0 +1,12 @@
+SELECT comments.message_id, comments.comment, DATE_FORMAT(comments.updated_at, '%M %D %Y') AS comment_date, 
+	CONCAT(users.first_name, ' ', users.last_name) AS commenter
+FROM comments 
+LEFT JOIN messages ON comments.message_id = messages.message_id 
+LEFT JOIN users ON comments.user_id = users.user_id
+ORDER_BY comments.updated_at ASC
+
+SELECT CONCAT(users.first_name, ' ', users.last_name) AS user_name, DATE_FORMAT(messages.updated_at, '%M %D %Y') AS message_date,
+    messages.message 
+FROM users 
+JOIN messages ON users.user_id = messages.user_id 
+ORDER BY messages.updated_at DESC

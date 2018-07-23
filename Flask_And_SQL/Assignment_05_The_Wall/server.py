@@ -65,10 +65,13 @@ def thewall():
     session['show_login'] = "d-none"
     session['show_register'] = "d-none"
     session['show_logout'] = "inline-block"
-    # Get user info from database so it can be displayed on the dash
-    query = "SELECT CONCAT(users.first_name, ' ', users.last_name) AS user_name, DATE_FORMAT(messages.updated_at, '%M %D %Y') AS message_date, messages.message FROM users JOIN messages ON users.user_id = messages.user_id ORDER BY messages.updated_at DESC"
+    # Get user messages from database so it can be displayed on the dash
+    query = "SELECT CONCAT(users.first_name, ' ', users.last_name) AS user_name, DATE_FORMAT(messages.updated_at, '%M %D %Y') AS message_date, messages.message, messages.message_id FROM users JOIN messages ON users.user_id = messages.user_id ORDER BY messages.updated_at DESC"
     messages = mysql.query_db(query)
-    return render_template('wall.html', all_messages=messages)
+    # Get comments from database
+    query = "SELECT comments.message_id, comments.comment, DATE_FORMAT(comments.updated_at, '%M %D %Y') AS comment_date, CONCAT(users.first_name, ' ', users.last_name) AS commenter FROM comments LEFT JOIN messages ON comments.message_id = messages.message_id LEFT JOIN users ON comments.user_id = users.user_id ORDER BY comments.updated_at ASC"
+    comments = mysql.query_db(query)
+    return render_template('wall.html', all_messages=messages, all_comments=comments)
 
 # Page for registered users to login
 @app.route('/login')
@@ -112,6 +115,8 @@ def logout():
 @app.route('/addmessage', methods=['POST'])
 def add_message():
     # Check for a valid length for a message
+    print "*" * 80
+    print type(request.form['message'])
     if len(request.form['message']) < 5:
         flash('Messages should be longer than 5 characters', 'warning')
         return redirect('/thewall')

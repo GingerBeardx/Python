@@ -17,9 +17,9 @@
         <h3>Welcome, {{ session['user_name'] }}! </h3>
         <div class="mt-2">
             <h4>Post a message:</h4>
-            <form action="/addmessage" method="POST">
+            <form action="/addmessage" method="POST" id="create_message">
                 <div class="form-group">
-                    <textarea class="form-control" name="message"></textarea>
+                    <textarea for="new_message" class="form-control" name="message"></textarea>
                 </div>
                 <div class="mb-3">
                     <input type="submit" class="btn btn-primary btn-small" value="Post Message">
@@ -34,7 +34,19 @@
                         <h5>{{ message.user_name }} - {{ message.message_date }}</h5>
                     </div>
                     <div class="card-body">
-                        {{ message.message }}    
+                        {{ message.message }}
+                        {% for comment in all_comments %}
+                            {% if message.message_id == comment.message_id %}
+                                <div class="card ml-3 mt-2">
+                                    <div class="card-header card-title">
+                                        <strong>{{ comment.commenter }} - {{ comment.comment_date }}</strong>
+                                    </div>
+                                    <div class="card-body ml-3">
+                                        {{ comment.comment }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor%}
                     </div>
                 </div>
                 {% endfor %}
