@@ -115,8 +115,6 @@ def logout():
 @app.route('/addmessage', methods=['POST'])
 def add_message():
     # Check for a valid length for a message
-    print "*" * 80
-    print type(request.form['message'])
     if len(request.form['message']) < 5:
         flash('Messages should be longer than 5 characters', 'warning')
         return redirect('/thewall')
@@ -127,7 +125,23 @@ def add_message():
         'message': request.form['message']
     }
     mysql.query_db(query, data)
-    flash('New message posted to The Wall', 'info')
+    flash('New message posted to The Wall!', 'info')
     return redirect('/thewall')
 
+@app.route('/addcomment', methods=['POST'])
+def add_comment():
+    # Check for a valid length for a message
+    if len(request.form['comment']) < 5:
+        flash('Comments should be longer than 5 characters', 'warning')
+        return redirect('/thewall')
+    # If validated insert message into database
+    query = "INSERT INTO comments (message_id, user_id, comment, created_at, updated_at) VALUES (:message_id, :user_id, :comment, NOW(), NOW());"
+    data = {
+        'message_id': request.form['message_id'],
+        'user_id': session['user_id'],
+        'comment': request.form['comment']
+    }
+    mysql.query_db(query, data)
+    flash('New comment posted to The Wall!', 'info')
+    return redirect('/thewall')
 app.run(debug=True)
