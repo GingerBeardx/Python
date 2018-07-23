@@ -123,6 +123,6 @@ def add_message():
     }
     mysql.query_db(query, data)
     flash('New message posted to The Wall', 'info')
-    return redirect('thewall')
+    return redirect('/thewall')
 
 app.run(debug=True)
