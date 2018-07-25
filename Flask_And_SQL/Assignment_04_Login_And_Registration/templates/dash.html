@@ -13,30 +13,32 @@
         {% endif %}
     {% endwith %}    
     </div>
-    <h3>Welcome, {{ session['user_name'] }}! </h3>
-    <h4>Here are the other registered users:</h4>
-    <!-- Shows a table of registered users -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Email</th>
-                <th scope="col">Password</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Created</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loops through users in the database to display each of them -->
-            {% for user in all_users %}
+    <div>
+        <h3>Welcome, {{ session['user_name'] }}! </h3>
+        <h4>Here are the other registered users:</h4>
+        <!-- Shows a table of registered users -->
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{ user['email'] }}</td>
-                    <td>{{ user['password'] }}</td>
-                    <td>{{ user['first_name'] }}</td>
-                    <td>{{ user['last_name'] }}</td>
-                    <td>{{ user['time'] }}</td>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Created</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <!-- Loops through users in the database to display each of them -->
+                {% for user in all_users %}
+                    <tr>
+                        <td>{{ user['email'] }}</td>
+                        <td>{{ user['password'] }}</td>
+                        <td>{{ user['first_name'] }}</td>
+                        <td>{{ user['last_name'] }}</td>
+                        <td>{{ user['time'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock%}
